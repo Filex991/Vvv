@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Navbar</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Rock+Salt&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .heading-font {
+      font-family: 'Rock Salt', cursive;
+    }
+    .hover-line::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #D94A28;
+      transition: width 0.3s;
+    }
+    .hover-line:hover::after {
+      width: 100%;
+    }
+    
+  </style>
+</head>
+<body class="bg-[#EFE6D4] text-[#3B2E24]">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-[#EFE6D4] shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2">
+          <img src="logo.png" alt="Logo" class="w-10 h-10 object-contain rounded-full">
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex space-x-6 items-center text-lg">
+          <a href="#" class="hover-line flex items-center gap-1 hover:text-[#D94A28]"><i data-lucide="home" class="w-5 h-5"></i> Home</a>
+
+          <!-- Destinations Dropdown -->
+          <div class="group relative">
+            <button class="hover-line flex items-center gap-1 hover:text-[#D94A28]">
+              <i data-lucide="map" class="w-5 h-5"></i> Destinations
+            </button>
+            <div class="absolute hidden group-hover:block bg-[#F8F3EB] text-sm shadow-lg rounded-md mt-2 p-3 space-y-2">
+              <a href="#" class="block hover:text-[#D94A28]">Serengeti</a>
+              <a href="#" class="block hover:text-[#D94A28]">Ngorongoro</a>
+              <a href="#" class="block hover:text-[#D94A28]">Zanzibar</a>
+            </div>
+          </div>
+
+          <!-- Packages Dropdown -->
+          <div class="group relative">
+            <button class="hover-line flex items-center gap-1 hover:text-[#D94A28]">
+              <i data-lucide="briefcase" class="w-5 h-5"></i> Packages
+            </button>
+            <div class="absolute hidden group-hover:block bg-[#F8F3EB] text-sm shadow-lg rounded-md mt-2 p-3 space-y-2">
+              <a href="#" class="block hover:text-[#D94A28]">Luxury Safari</a>
+              <a href="#" class="block hover:text-[#D94A28]">Budget Tour</a>
+              <a href="#" class="block hover:text-[#D94A28]">Honeymoon</a>
+            </div>
+          </div>
+
+          <!-- About Dropdown -->
+          <div class="group relative">
+            <button class="hover-line flex items-center gap-1 hover:text-[#D94A28]">
+              <i data-lucide="info" class="w-5 h-5"></i> About
+            </button>
+            <div class="absolute hidden group-hover:block bg-[#F8F3EB] text-sm shadow-lg rounded-md mt-2 p-3 space-y-2">
+              <a href="#" class="block hover:text-[#D94A28]">Company</a>
+              <a href="#" class="block hover:text-[#D94A28]">Team</a>
+              <a href="#" class="block hover:text-[#D94A28]">Reviews</a>
+            </div>
+          </div>
+
+          <a href="#" class="hover-line flex items-center gap-1 hover:text-[#D94A28]"><i data-lucide="phone" class="w-5 h-5"></i> Contact</a>
+          <a href="#booking" class="bg-[#D94A28] text-white px-4 py-2 rounded-full hover:bg-[#B93C20]">Book Now</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn" class="md:hidden text-[#3B2E24]">
+          <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-6 bg-[#EFE6D4] text-[#3B2E24] font-medium text-base space-y-2">
+      <a href="#" class="flex items-center gap-2 py-2 hover:text-[#D94A28]">
+        <i data-lucide="home" class="w-5 h-5"></i> Home
+      </a>
+
+      <!-- Destinations -->
+      <div class="space-y-1">
+        <button onclick="toggleDropdown('destDrop')" class="w-full flex justify-between items-center py-2 text-left hover:text-[#D94A28]">
+          <span class="flex items-center gap-2"><i data-lucide="map"></i> Destinations</span>
+          <i data-lucide="chevron-down" id="destChevron"></i>
+        </button>
+        <div id="destDrop" class="ml-6 pl-2 border-l-2 border-[#D94A28] hidden space-y-1 text-sm text-[#3B2E24]">
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Serengeti</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Ngorongoro</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Zanzibar</a>
+        </div>
+      </div>
+
+      <!-- Packages -->
+      <div class="space-y-1">
+        <button onclick="toggleDropdown('packDrop')" class="w-full flex justify-between items-center py-2 text-left hover:text-[#D94A28]">
+          <span class="flex items-center gap-2"><i data-lucide="briefcase"></i> Packages</span>
+          <i data-lucide="chevron-down" id="packChevron"></i>
+        </button>
+        <div id="packDrop" class="ml-6 pl-2 border-l-2 border-[#D94A28] hidden space-y-1 text-sm text-[#3B2E24]">
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Luxury Safari</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Budget Tour</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Honeymoon</a>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="space-y-1">
+        <button onclick="toggleDropdown('aboutDrop')" class="w-full flex justify-between items-center py-2 text-left hover:text-[#D94A28]">
+          <span class="flex items-center gap-2"><i data-lucide="info"></i> About</span>
+          <i data-lucide="chevron-down" id="aboutChevron"></i>
+        </button>
+        <div id="aboutDrop" class="ml-6 pl-2 border-l-2 border-[#D94A28] hidden space-y-1 text-sm text-[#3B2E24]">
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Company</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Team</a>
+          <a href="#" class="block py-1 hover:text-[#D94A28]">Reviews</a>
+        </div>
+      </div>
+
+      <a href="#" class="flex items-center gap-2 py-2 hover:text-[#D94A28]">
+        <i data-lucide="phone" class="w-5 h-5"></i> Contact
+      </a>
+
+      <a href="#booking" class="block mt-2 text-center bg-[#D94A28] text-white px-4 py-2 rounded-full hover:bg-[#B93C20]">
+        Book Now
+      </a>
+    </div>
+  </nav>
+  
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="relative w-full h-[380px] md:h-[420px] bg-center bg-cover" style="background-image: url('50.jpg');">
+  <!-- Dark Adventure Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-[#1f150dcc] via-[#1f150dcc] to-[#1f150d99]"></div>
+
+  <!-- Text Content -->
+  <div class="relative z-10 max-w-3xl mx-auto h-full flex flex-col items-center justify-center text-center text-white px-4 animate-fade-in">
+    <h1 class="text-4xl md:text-5xl font-bold tracking-wide text-[#FFD9A0]" style="font-family: 'Bebas Neue', cursive;">
+      Tanzania: The Heart of African Adventure
+    </h1>
+    <p class="text-base md:text-lg mt-2 font-normal text-[#FCEFDA] max-w-xl" style="font-family: 'Nunito', sans-serif;">
+      From the roaring lions of Serengeti to the snow-capped peak of Kilimanjaro and the spice-scented shores of Zanzibar — Tanzania is where every journey becomes a story.
+    </p>
+    <a href="#packages" class="mt-5 bg-[#D94A28] hover:bg-[#b83d20] text-white px-6 py-2 rounded-full font-semibold tracking-wide shadow-md transition">
+      Start Your Adventure Now
+    </a>
+  </div>
+</section>
+
+
+<section style="background-color: #fdfaf5; padding: 2rem; font-family: 'Verdana', sans-serif;">
+  <!-- Heading -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="color: #1d3b23; font-size: 2.3rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">
+      Book Your Tanzania Vacation!
+    </h2>
+    <p style="color: #7a321c; font-size: 1.1rem; font-weight: 600; margin-top: 0.5rem; font-style: italic;">
+      Your Dream Trip, Our Expertise
+    </p>
+  </div>
+  
+  <!-- Grid Container -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem;">
+    
+    <!-- Trip Card 1 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="100.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $2100 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; right: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; right: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">11 DAYS SAFARI & ZANZIBAR</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Best of both worlds: Wildlife and tropical beaches</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#1d3b23'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+    <!-- Trip Card 2 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="200.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $2908 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">15 DAYS SAFARI & ZANZIBAR</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Travel at your own pace</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#ff7400'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+    <!-- Trip Card 3 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="300.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $1428 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">9 DAYS SAFARI</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Wildebeest Migration and Mara River crossing</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#ff7400'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+    <!-- Trip Card 4 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="400.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $1562 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">7 DAYS SAFARI</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Visit two of Africa’s Seven Natural Wonders</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#ff7400'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+    <!-- Trip Card 5 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="50.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $1977 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">CLIMBING KILIMANJARO MARANGU ROUTE</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Certified for Ethical Climbing</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#ff7400'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+    <!-- Trip Card 6 -->
+    <div style="position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+      <img src="400.jpg" alt="Trip" style="width: 100%; height: auto; display: block;" />
+      <div style="position: absolute; top: 1rem; right: 1rem; background-color: #f2a134; padding: 0.3rem 0.6rem; color: white; font-weight: bold; font-size: 0.85rem;">
+        From $2728 USD*
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"></div>
+      <div style="position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem; color: white; z-index: 2;">
+        <h3 style="font-size: 1rem; font-weight: bold; margin-bottom: 0.3rem;">CLIMBING KILIMANJARO MACHAME ROUTE</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 0.7rem;">Certified for Ethical Climbing</p>
+        <a href="#" style="display: inline-block; background-color: #B14B01; color: white; padding: 0.45rem 0.9rem; font-size: 0.8rem; font-weight: bold; text-decoration: none; border-radius: 3px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d65b00'" onmouseout="this.style.backgroundColor='#ff7400'">
+          VIEW ITINERARY
+        </a>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Full List Button -->
+  <div style="text-align: center; margin-top: 3rem;">
+    <a href="#" style="display: inline-block; background-color: #e05d27; color: white; padding: 1rem 2rem; text-decoration: none; font-weight: bold; font-size: 1rem; border-radius: 4px;">
+      SHOW ALL CUSTOMIZABLE TRIPS
+    </a>
+  </div>
+</section>
+
+<section class="relative py-24 px-6 md:px-12 bg-gradient-to-b from-[#fef7ec] to-[#fff8f0] overflow-hidden">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-5xl font-extrabold text-[#3b2f2f] tracking-tight mb-6">Why Travel With EWOTUNsafari?</h2>
+    <p class="text-lg text-[#5c4b3b] max-w-3xl mx-auto mb-16">
+      Journey through Tanzania with a trusted local expert. From the vast plains of the Serengeti to the lush crater of Ngorongoro, we provide authentic, safe, and unforgettable safari experiences.
+    </p>
+    <div class="grid gap-16"><div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c2.28 0 4-1.72 4-4s-1.72-4-4-4-4 1.72-4 4 1.72 4 4 4Zm0 2c-2.66 0-8 1.34-8 4v2h16v-2c0-2.66-5.34-4-8-4Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">Expert Local Guides</h3>
+      <p class="text-[#5c4b3b] mt-2">Our guides are native Tanzanians, deeply knowledgeable and passionate about wildlife, culture, and landscapes you’ll explore.</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">Tailored Adventures</h3>
+      <p class="text-[#5c4b3b] mt-2">We craft each itinerary around your needs—honeymoon, family, luxury, or adventure—ensuring every moment matches your dream.</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">Authentic Wildlife Encounters</h3>
+      <p class="text-[#5c4b3b] mt-2">Witness the Great Migration, the Big Five, and more—safely and ethically, guided by professionals who know where to go and when.</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.38 0-2.5 1.12-2.5 2.5S10.62 13 12 13s2.5-1.12 2.5-2.5S13.38 8 12 8z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707" />
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">Eco-Conscious & Ethical</h3>
+      <p class="text-[#5c4b3b] mt-2">We promote sustainable tourism by supporting conservation, using eco-lodges, and empowering local communities.</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">Trusted Safety & Comfort</h3>
+      <p class="text-[#5c4b3b] mt-2">Top-tier vehicles, certified guides, and detailed logistics—so you can explore worry-free, with peace of mind.</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0">
+      <div class="w-16 h-16 rounded-full bg-[#eab308] flex items-center justify-center">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h2l.4 2M7 5h10l1 5H6.4M16 13a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </div>
+    </div>
+    <div class="text-left">
+      <h3 class="text-2xl font-semibold text-[#3b2f2f]">24/7 Local Support</h3>
+      <p class="text-[#5c4b3b] mt-2">We're available at all times, on the ground in Tanzania, to assist and ensure your experience is smooth and unforgettable.</p>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Inter&display=swap" rel="stylesheet">
+
+<section style="background-color: #f0ece4; padding: 60px 20px; font-family: 'Inter', sans-serif;">
+  <h2 style="text-align: center; font-size: 2.5rem; font-family: 'PT Serif', serif; color: #2e3e2e; margin-bottom: 10px;">
+    Explore Tanzania's Top Destinations
+  </h2>
+  <p style="text-align: center; max-width: 700px; margin: 0 auto 50px auto; color: #555; font-size: 1rem;">
+    Discover the iconic wildlife parks, hidden highlands, and pristine coastlines that make Tanzania a safari and beach paradise. Each destination tells a story of nature’s wonder.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: auto;">
+
+    <!-- Destination Block Template -->
+    <div style="overflow: hidden;">
+      <img src="200.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Serengeti">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c; margin-bottom: 10px;">Serengeti National Park</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Famous for the Great Migration and endless plains, Serengeti offers thrilling safaris filled with lions, cheetahs, elephants, and unforgettable sunsets.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 10px;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="100.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Ngorongoro">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Ngorongoro Crater</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          A UNESCO World Heritage site, this massive crater shelters thousands of animals in a surreal volcanic bowl with epic game viewing all year round.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="300.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Lake Manyara">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Lake Manyara National Park</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Nestled at the base of the Rift Valley, Lake Manyara is known for tree-climbing lions, flocks of flamingos, and lush groundwater forests.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="400.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Tarangire">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Tarangire National Park</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Famous for its majestic baobab trees and large herds of elephants, Tarangire is a hidden gem with dramatic landscapes and fewer crowds.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="500.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Kilimanjaro">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Mount Kilimanjaro</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Africa’s highest peak, Kilimanjaro invites trekkers to climb through rainforest, alpine desert, and icy summit with unforgettable panoramic views.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="600.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Mikumi">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Mikumi National Park</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Located near Dar es Salaam, Mikumi is perfect for short safaris, offering open savannahs and a chance to see zebras, buffalo, and big cats.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="100.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Udzungwa">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Udzungwa Mountains</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          A haven for hikers and biodiversity lovers, Udzungwa offers scenic forest trails, endemic species, and waterfalls deep within lush mountain ranges.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="400.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Arusha">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Arusha National Park</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          A picturesque park with Mt. Meru, lakes, and giraffes. Arusha NP is ideal for walking safaris and canoeing with Mount Kilimanjaro as your backdrop.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="200.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Mahale">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Mahale Mountains</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          Set on Lake Tanganyika, Mahale is known for wild chimpanzee trekking and untouched forests. A remote paradise for nature lovers.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+    <div style="overflow: hidden;">
+      <img src="500.jpg" style="width: 100%; height: 200px; object-fit: cover;" alt="Zanzibar">
+      <div style="padding-top: 15px;">
+        <h3 style="font-family: 'PT Serif', serif; font-size: 20px; color: #2d3c2c;">Zanzibar Beaches</h3>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+          White sands, turquoise waters, and rich Swahili culture make Zanzibar the perfect tropical escape after a mainland safari adventure.
+        </p>
+        <a href="#" style="color: #267c4b; font-weight: 600; text-decoration: none;">Explore More →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<section style="
+  background-color: #f4f1ea;
+  padding: 60px 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #2b2b2b;
+">
+  <div style="max-width: 1000px; margin: auto;">
+    <h2 style="
+      font-family: 'Yeseva One', cursive;
+      color: #4b3d2a;
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    ">
+      Discover the Timeless Beauty of Tanzania
+    </h2>
+
+    <p style="font-size: 18px; line-height: 1.8; text-align: justify;">
+      <i class="fas fa-compass" style="color:#a87d47;"></i>
+      Your journey into the heart of Africa begins here—Tanzania, a land sculpted by nature and alive with ancient rhythm. From the untamed wilderness of the Serengeti to the snow-kissed summit of Mount Kilimanjaro, every corner of this breathtaking country tells a different story.
+      <br><br>
+      <i class="fas fa-paw" style="color:#a87d47;"></i>
+      Witness the Great Migration, one of the world’s most thrilling wildlife spectacles, as millions of wildebeest thunder across vast plains in search of fresh pasture, chased by lions, leopards, and drama under open skies. Descend into the Ngorongoro Crater, a UNESCO World Heritage Site and natural amphitheater brimming with life.
+      <br><br>
+      <i class="fas fa-tree" style="color:#a87d47;"></i>
+      Explore baobab-studded Tarangire, flamingo-filled Lake Manyara, and the tropical paradise of Zanzibar—where spice-scented air meets turquoise seas and white-sand shores. Every landscape here feels hand-painted by nature itself.
+      <br><br>
+      <i class="fas fa-users" style="color:#a87d47;"></i>
+      But Tanzania is more than its landscapes—it’s the home of proud cultures, welcoming smiles, and traditions that live in harmony with nature. Meet the Maasai, walk sacred paths, and feel the rhythm of Africa in every heartbeat and every sunset.
+      <br><br>
+      <i class="fas fa-globe-africa" style="color:#a87d47;"></i>
+      Whether you’re chasing the thrill of safari, the peace of the wild, or a life-changing escape, Tanzania welcomes you with a wild, open heart. This isn’t just travel—it’s transformation.
+    </p>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="#destinations" style="
+        background-color: #a87d47;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#8b6634'" onmouseout="this.style.background='#a87d47'">
+        Explore Destinations
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<section style="background: #fff; padding: 4rem 1.5rem; font-family: 'Montserrat', sans-serif;">
+  <div style="max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; align-items: flex-start;">
+    
+    <!-- Left: Text and Logo -->
+    <div style="flex: 1; min-width: 300px;">
+      <h2 style="color: #15325e; font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">
+        The best way to explore Tanzania
+      </h2>
+      <p style="color: #333; font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        EWOTUNsafari was founded with a passion for sharing the wonders of Tanzania. From thrilling safaris in Serengeti to peaceful retreats in Zanzibar, our tailor-made trips offer authentic, ethical adventures. 
+        Our expert local guides, modern 4x4 fleet, and personalized service ensure every journey is safe, smooth, and unforgettable. We work closely with communities and conservation efforts to protect the beauty of Tanzania for generations to come.
+      </p>
+      <img src="logo.png" alt="Safe Tourism Certified" style="max-width: 120px;">
+      <br>
+      <a href="#about" style="background-color: #8e1e0e; color: white; padding: 0.7rem 1.5rem; text-decoration: none; font-weight: bold; border-radius: 2px; display: inline-block;">
+        Find out more
+      </a>
+    </div>
+
+    <!-- Right: Contact Card -->
+    <div style="flex: 1; min-width: 280px; background-color: #8e1e0e; color: white; padding: 2rem 1.5rem; border-radius: 2px;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 1.2rem;">Here to help</h3>
+      <p style="margin-bottom: 1rem;"><strong>Email :</strong><br>
+        <a href="mailto filexkuyan@gmail.com" style="color: #ffc3b2; text-decoration: none;">filexkuyan@gmail.com</a>
+      </p>
+      <p><strong>Quick Contact:</strong><br>
+        <a href="#contact" style="color: white; text-decoration: underline;">Request a call back</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Add this inside <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- Footer Section -->
+<footer style="
+  background: url('200.jpg') no-repeat center center / cover;
+  position: relative;
+  padding: 60px 20px 30px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+">
+  <!-- Overlay -->
+  <div style="
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;">
+  </div>
+
+  <!-- Content -->
+  <div style="position: relative; z-index: 2; max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
+    
+    <!-- About -->
+    <div style="flex: 1; min-width: 250px;">
+      <h2 style="color: #fcd34d; font-family: 'PT Serif', serif;">EWOTUNsafari</h2>
+      <p>
+        Discover unforgettable wildlife adventures and tropical escapes with Tanzania’s most trusted safari partner.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div style="flex: 1; min-width: 180px;">
+      <h3 style="color: #fcd34d;">Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: #fff; text-decoration: none;"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" style="color: #fff; text-decoration: none;"><i class="fas fa-map"></i> Destinations</a></li>
+        <li><a href="#" style="color: #fff; text-decoration: none;"><i class="fas fa-gift"></i> Packages</a></li>
+        <li><a href="#" style="color: #fff; text-decoration: none;"><i class="fas fa-info-circle"></i> Why Book With Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div style="flex: 1; min-width: 200px;">
+      <h3 style="color: #fcd34d;">Contact</h3>
+      <p>
+        <i class="fas fa-envelope"></i> <a href="mailto:info@ewotunsafari.com" style="color: #fff;">info@ewotunsafari.com</a><br>
+        <i class="fas fa-phone"></i> <a href="tel:+255772350147" style="color: #fff;">+255 772 350 147</a><br>
+        <i class="fab fa-whatsapp"></i> <a href="https://wa.me/255772350147" style="color: #fff;">WhatsApp Us</a>
+      </p>
+    </div>
+
+    <!-- Logos -->
+    <div style="flex: 1; min-width: 200px; text-align: center;">
+      <h3 style="color: #fcd34d;">We Accept</h3>
+      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" style="height: 40px; margin: 10px;" />
+    </div>
+  </div>
+
+  <!-- Social & Copyright -->
+  <div style="position: relative; z-index: 2; text-align: center; margin-top: 40px; border-top: 1px solid #444; padding-top: 20px;">
+    <div style="margin-bottom: 10px;">
+      <a href="#" style="color: #fcd34d; margin: 0 10px;"><i class="fab fa-facebook fa-lg"></i></a>
+      <a href="#" style="color: #fcd34d; margin: 0 10px;"><i class="fab fa-youtube fa-lg"></i></a>
+      <a href="#" style="color: #fcd34d; margin: 0 10px;"><i class="fab fa-instagram fa-lg"></i></a>
+    </div>
+    <p style="font-size: 13px;">© 2025 EWOTUNsafari. All rights reserved. | <a href="#" style="color: #ccc;">Privacy Policy</a></p>
+  </div>
+</footer>
+
+
+<!-- Fixed WhatsApp & Book Now Buttons for Mobile -->
+<div id="floatingButtons" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+  animation: slideUp 1s ease forwards;
+">
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/255772350147?text=Hello%20EWOTUNsafari%2C%20I%27m%20interested%20in%20a%20trip"
+     style="
+      background-color: #25D366;
+      color: white;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    ">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp"/>
+    WhatsApp
+  </a>
+
+  <!-- Book Now Button -->
+  <a href="#booking-section" 
+     style="
+      background-color: #FF5722;
+      color: white;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    ">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/ticket.png" alt="Book Now"/>
+    Book Now
+  </a>
+
+</div>
+
+<!-- Animation & Visibility Script -->
+<style>
+@keyframes slideUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+</style>
+
+<script>
+function toggleFloatingButtons() {
+  const btns = document.getElementById("floatingButtons");
+  if (window.innerWidth <= 768) {
+    btns.style.display = "flex";
+  } else {
+    btns.style.display = "none";
+  }
+}
+window.addEventListener("load", toggleFloatingButtons);
+window.addEventListener("resize", toggleFloatingButtons);
+</script>
+
+
+<!-- Fade Animation -->
+<style>
+  @keyframes fade-in {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out both;
+  }
+</style>
+
+<!-- Animation -->
+<style>
+  @keyframes fade-in {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out both;
+  }
+</style>
+
+
+<!-- Animation Style -->
+<style>
+  @keyframes fade-in {
+    0% {opacity: 0; transform: translateY(30px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out both;
+  }
+</style>
+  
+
+  <!-- JavaScript -->
+  <script>
+    lucide.createIcons();
+
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      dropdown.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
